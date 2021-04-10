@@ -3,9 +3,13 @@ from keras.layers import Convolution2D
 from keras.layers import MaxPooling2D
 from keras.layers import Flatten
 from keras.layers import Dense
+import tensorflow as tf
+
+print("Version control : ",tf.__version__)
 
 # Initializing the CNN
 classifier = Sequential()
+
 # First convolution layer and pooling
 classifier.add(Convolution2D(32, (3, 3), input_shape=(64, 64, 1), activation='relu'))
 classifier.add(MaxPooling2D(pool_size=(2, 2)))
@@ -33,21 +37,21 @@ test_datagen = ImageDataGenerator(rescale=1./255)
 
 training_set = train_datagen.flow_from_directory('data/train',
                                                  target_size=(64, 64),
-                                                 batch_size=5,
+                                                 batch_size=10,
                                                  color_mode='grayscale',
                                                  class_mode='categorical')
 
 test_set = test_datagen.flow_from_directory('data/test',
                                             target_size=(64, 64),
-                                            batch_size=5,
+                                            batch_size=10,
                                             color_mode='grayscale',
                                             class_mode='categorical')
 classifier.fit(
         training_set,
-        steps_per_epoch=2100, # No of images in training set : 0 to 6 every folder has 300 images.
+        steps_per_epoch=630, # No of images in training set : 0 to 6 every folder has 900 images.
         epochs=10,
         validation_data=test_set,
-        validation_steps=70) # No of images in test set : 0 to 6 every folder has 10 images.
+        validation_steps=63) # No of images in test set : 0 to 6 every folder has 90 images.
 
 # Saving the model
 model_json = classifier.to_json()
