@@ -5,6 +5,8 @@ Sign Language Translator project for final capstone project at Bahçeşehir Univ
 
 ## How to run
 
+Load the needed modules. I am too lazy to create requirements text file.
+
 `cam_capture.py` for produce input data.
 
 `train.py` for training and create json and h5 model.
