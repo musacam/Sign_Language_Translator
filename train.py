@@ -20,8 +20,8 @@ classifier.add(MaxPooling2D(pool_size=(2, 2)))
 # Flattening the layers
 classifier.add(Flatten())
 # Adding a fully connected layer
-classifier.add(Dense(units=128, activation='relu'))
-classifier.add(Dense(units=7, activation='softmax')) # softmax for more than 2
+classifier.add(Dense(units=128, activation='relu')) # Lets think
+classifier.add(Dense(units=10, activation='softmax')) # softmax for more than 2
 # Compiling the CNN
 classifier.compile(optimizer='adam', loss='categorical_crossentropy', metrics=['accuracy'])
 
@@ -48,10 +48,10 @@ test_set = test_datagen.flow_from_directory('data/test',
                                             class_mode='categorical')
 classifier.fit(
         training_set,
-        steps_per_epoch=630, # No of images in training set : 0 to 6 every folder has 900 images.
+        steps_per_epoch=900, # No of images in training set : 0 to 9 every folder has 900 images.
         epochs=10,
         validation_data=test_set,
-        validation_steps=63) # No of images in test set : 0 to 6 every folder has 90 images.
+        validation_steps=90) # No of images in test set : 0 to 9 every folder has 90 images.
 
 # Saving the model
 model_json = classifier.to_json()

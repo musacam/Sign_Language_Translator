@@ -3,7 +3,7 @@ import numpy as np
 import os
 
 # Train or test can change by its purpose.
-mode = 'train'
+mode = 'test'
 directory = 'data/' + mode + '/'
 
 cap = cv2.VideoCapture(0)
@@ -20,7 +20,11 @@ while True:
              'three': len(os.listdir(directory + "/3")),
              'four': len(os.listdir(directory + "/4")),
              'five': len(os.listdir(directory + "/5")),
-             'six': len(os.listdir(directory + "/6"))}
+             'six': len(os.listdir(directory + "/6")),
+             'seven': len(os.listdir(directory + "/7")),
+             'eight': len(os.listdir(directory + "/8")),
+             'nine': len(os.listdir(directory + "/9"))
+             }
 
     # Coordinates of the ROI
     x1 = int(0.5 * frame.shape[1])
@@ -57,6 +61,12 @@ while True:
         cv2.imwrite(directory + '5/' + str(count['five']) + '.jpg', roi)
     if interrupt & 0xFF == ord('6'):
         cv2.imwrite(directory + '6/' + str(count['six']) + '.jpg', roi)
+    if interrupt & 0xFF == ord('7'):
+        cv2.imwrite(directory + '7/' + str(count['seven']) + '.jpg', roi)
+    if interrupt & 0xFF == ord('8'):
+        cv2.imwrite(directory + '8/' + str(count['eight']) + '.jpg', roi)
+    if interrupt & 0xFF == ord('9'):
+        cv2.imwrite(directory + '9/' + str(count['nine']) + '.jpg', roi)
 
     #This could be shortened to one line if we want specific input to train
     #But if we don't want to rerun program again and again we could think

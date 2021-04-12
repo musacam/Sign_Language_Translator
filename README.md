@@ -25,6 +25,7 @@ Load the needed modules. I am too lazy to create requirements text file.
 - [ ] Add letters and see if they work
 - [ ] Improve CNN structure
 - [ ] Think about more optimal solution about threshold values
+    - [ ] Set hand histogram
 - [ ] Add words and space structure (Optional for the last part)
 - [ ] Text to speech (Optional for the last part)
 
