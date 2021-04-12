@@ -2,6 +2,8 @@ import cv2
 
 capture = cv2.VideoCapture(0)
 
+# Set hand histogram maybe ????
+
 while (True):
 
     (ret, frame) = capture.read()
