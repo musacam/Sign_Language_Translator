@@ -1,17 +1,24 @@
-# Sign_Language_Translator
+# Sign Language Translator
 
-Sign Language Translator project for final capstone project at Bahçeşehir University.
+AI interpreter for Turkish Sign Language project for final capstone at Bahçeşehir University.
 
+## How to Run
 
-## How to run
+Load the needed modules. I am too lazy to create requirements text file. If you added new inputs
+you need to train the data first. But you can use our trained model.
+If you are ready to go just download and run `final.py`.
 
-Load the needed modules. I am too lazy to create requirements text file.
+## What Are Those Python Files 
 
-`cam_capture.py` for produce input data.
+`cam_capture.py` for produce input data. You need to add filepath to the project and when running this press
+on keyboard that you are giving to the input.
 
-`train.py` for training and create json and h5 model.
+`train.py` for training and create trained model. Don't forget! Everytime you add input, you need to update
+classifier.fit function. 
 
 `final.py` for testing and observing result part.
+
+`rotate_images.py` for enlarge the dataset and avoiding the mirror match.
 
 `segment.py` and `threshold.py` for development purposes only let us handle it.
 
@@ -22,8 +29,10 @@ Load the needed modules. I am too lazy to create requirements text file.
 
 - [x] Basic structure implementation
 - [x] Numbers trained and desired result observed
-- [ ] Add letters and see if they work
+- [x] Add rotate_images function
+- [ ] Add letters
 - [ ] Improve CNN structure
+    - [ ] Add new layers maybe ?
 - [ ] Think about more optimal solution about threshold values
     - [ ] Set hand histogram
 - [ ] Add words and space structure (Optional for the last part)
@@ -31,6 +40,6 @@ Load the needed modules. I am too lazy to create requirements text file.
 
 ### Software Engineering Dept.
 
-- [ ] Enlargen dataset (Currently 900 for training 90 for test for every input)
+- [ ] Enlarge dataset (Currently 900 for training, 90 for test for every input)
 - [ ] UI implementation
 - [ ] Different menus (Optional for the last part)
