@@ -15,24 +15,24 @@ cap = cv2.VideoCapture(0)
 categories = {0: 'ZERO', 1: 'ONE', 2: 'TWO', 3: 'THREE', 4: 'FOUR',
               5: 'FIVE', 6: 'SIX', 7: 'SEVEN', 8: 'EIGHT', 9: 'NINE'}
 
+# Background subtraction implementation ?
+
+# https://opencv-python-tutroals.readthedocs.io/en/latest/py_tutorials/py_video/py_bg_subtraction/py_bg_subtraction.html#exercises
+
 
 while True:
     _, frame = cap.read()
-    # Simulating mirror image
     frame = cv2.flip(frame, 1)
-
     # Coordinates of the ROI
     x1 = 320
     y1 = 10
     x2 = 630
     y2 = 320
     # Drawing the ROI
-    # The increment/decrement by 1 is to compensate for the bounding box
-    cv2.rectangle(frame, (x1 - 1, y1 - 1), (x2 + 1, y2 + 1), (255, 255, 0), 1)
+    cv2.rectangle(frame, (x1, y1), (x2, y2), (255, 255, 0), 1)
     # Extracting the ROI
     roi = frame[y1:y2, x1:x2]
-
-    # Resizing the ROI so it can be fed to the model for prediction
+    # Resizing the ROI
     roi = cv2.resize(roi, (64, 64))
     roi = cv2.cvtColor(roi, cv2.COLOR_BGR2GRAY)
     _, test_image = cv2.threshold(roi, 120, 255, cv2.THRESH_BINARY)

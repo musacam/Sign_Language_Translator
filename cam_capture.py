@@ -46,24 +46,8 @@ while True:
         break
     if interrupt & 0xFF == ord('0'):
         cv2.imwrite(directory + '0/' + str(count['zero']) + '.jpg', roi)
-    if interrupt & 0xFF == ord('1'):
-        cv2.imwrite(directory + '1/' + str(count['one']) + '.jpg', roi)
-    if interrupt & 0xFF == ord('2'):
-        cv2.imwrite(directory + '2/' + str(count['two']) + '.jpg', roi)
-    if interrupt & 0xFF == ord('3'):
-        cv2.imwrite(directory + '3/' + str(count['three']) + '.jpg', roi)
-    if interrupt & 0xFF == ord('4'):
-        cv2.imwrite(directory + '4/' + str(count['four']) + '.jpg', roi)
-    if interrupt & 0xFF == ord('5'):
-        cv2.imwrite(directory + '5/' + str(count['five']) + '.jpg', roi)
-    if interrupt & 0xFF == ord('6'):
-        cv2.imwrite(directory + '6/' + str(count['six']) + '.jpg', roi)
-    if interrupt & 0xFF == ord('7'):
-        cv2.imwrite(directory + '7/' + str(count['seven']) + '.jpg', roi)
-    if interrupt & 0xFF == ord('8'):
-        cv2.imwrite(directory + '8/' + str(count['eight']) + '.jpg', roi)
-    if interrupt & 0xFF == ord('9'):
-        cv2.imwrite(directory + '9/' + str(count['nine']) + '.jpg', roi)
+
+    # You can change the input in order to add new input.
 
     #This could be shortened to one line if we want specific input to train
     #But if we don't want to rerun program again and again we could think
