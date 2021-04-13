@@ -30,16 +30,17 @@ classifier.fit function.
 - [x] Basic structure implementation
 - [x] Numbers trained and desired result observed
 - [x] Add rotate_images function
-- [ ] Add letters
 - [ ] Improve CNN structure
     - [ ] Add new layers maybe ?
-- [ ] Think about more optimal solution about threshold values
+- [ ] Think about more optimal solution about threshold values or background subtraction
     - [ ] Set hand histogram
+    - [ ] BackgroundSubtractorMOG
 - [ ] Add words and space structure (Optional for the last part)
 - [ ] Text to speech (Optional for the last part)
 
 ### Software Engineering Dept.
 
-- [ ] Enlarge dataset (Currently 900 for training, 90 for test for every input)
+- [ ] Enlarge the dataset (Currently 900 for training, 90 for test for every input)
+- [ ] Add letters to the dataset
 - [ ] UI implementation
 - [ ] Different menus (Optional for the last part)
