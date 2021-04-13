@@ -9,7 +9,7 @@ json_file.close()
 loaded_model = model_from_json(model_json)
 loaded_model.load_weights("model-bw.h5")
 
-cap = cv2.VideoCapture(0)
+vid = cv2.VideoCapture(0)
 
 # Numbers dictionary
 categories = {0: 'ZERO', 1: 'ONE', 2: 'TWO', 3: 'THREE', 4: 'FOUR',
@@ -21,7 +21,7 @@ categories = {0: 'ZERO', 1: 'ONE', 2: 'TWO', 3: 'THREE', 4: 'FOUR',
 
 
 while True:
-    _, frame = cap.read()
+    _, frame = vid.read()
     frame = cv2.flip(frame, 1)
     # Coordinates of the ROI
     x1 = 320
@@ -63,5 +63,5 @@ while True:
     if interrupt & 0xFF == 27:  # Esc key
         break
 
-cap.release()
+vid.release()
 cv2.destroyAllWindows()

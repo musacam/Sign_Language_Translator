@@ -5,32 +5,22 @@ import os
 mode = 'test'
 directory = 'data/' + mode + '/'
 
-cap = cv2.VideoCapture(0)
+vid = cv2.VideoCapture(0)
 
 while True:
-    _, frame = cap.read()
+    _, frame = vid.read()
     frame = cv2.flip(frame, 1)
 
     # Count dictionary
-    count = {'zero': len(os.listdir(directory + "/0")),
-             'one': len(os.listdir(directory + "/1")),
-             'two': len(os.listdir(directory + "/2")),
-             'three': len(os.listdir(directory + "/3")),
-             'four': len(os.listdir(directory + "/4")),
-             'five': len(os.listdir(directory + "/5")),
-             'six': len(os.listdir(directory + "/6")),
-             'seven': len(os.listdir(directory + "/7")),
-             'eight': len(os.listdir(directory + "/8")),
-             'nine': len(os.listdir(directory + "/9"))
-             }
+    count = {'zero': len(os.listdir(directory + "/0"))}
 
     # Coordinates of the ROI
     x1 = 320
     y1 = 10
     x2 = 630
     y2 = 320
-    ####################### Drawing the ROI ##############################
-    cv2.rectangle(frame, (x1 - 1, y1 - 1), (x2 + 1, y2 + 1), (255, 255, 0), 1)
+    # Drawing the ROI
+    cv2.rectangle(frame, (x1, y1), (x2, y2), (255, 255, 0), 1)
     # Extracting the ROI
     roi = frame[y1:y2, x1:x2]
     roi = cv2.resize(roi, (64, 64))
@@ -53,5 +43,5 @@ while True:
     #But if we don't want to rerun program again and again we could think
     #to implement like this.
 
-cap.release()
+vid.release()
 cv2.destroyAllWindows()

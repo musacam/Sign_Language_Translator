@@ -14,9 +14,9 @@ classifier.add(Convolution2D(32, (3, 3), activation='relu'))
 classifier.add(MaxPooling2D(pool_size=(2, 2)))
 # Flattening the layers
 classifier.add(Flatten())
-# Adding a fully connected layer
+# Fully connected layer
 classifier.add(Dense(units=128, activation='relu')) # Lets think
-classifier.add(Dense(units=10, activation='softmax')) # softmax for more than 2
+classifier.add(Dense(units=10, activation='softmax'))
 # Compiling the CNN
 classifier.compile(optimizer='adam', loss='categorical_crossentropy', metrics=['accuracy'])
 
