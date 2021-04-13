@@ -1,6 +1,6 @@
 # Sign Language Translator
 
-AI interpreter for Turkish Sign Language project for final capstone at Bahçeşehir University.
+AI interpreter for Turkish Sign Language project for final capstone in Bahçeşehir University.
 
 ## How to Run
 
@@ -35,6 +35,7 @@ classifier.fit function.
 - [ ] Think about more optimal solution about threshold values or background subtraction
     - [ ] Set hand histogram
     - [ ] BackgroundSubtractorMOG
+- [ ] Think about moving signs and ask for advise
 - [ ] Add words and space structure (Optional for the last part)
 - [ ] Text to speech (Optional for the last part)
 
