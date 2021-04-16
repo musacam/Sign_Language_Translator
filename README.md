@@ -30,18 +30,20 @@ classifier.fit function.
 - [x] Basic structure implementation
 - [x] Numbers trained and desired result observed
 - [x] Add rotate_images function
-- [ ] Improve CNN structure
-    - [ ] Add new layers maybe ?
+- [x] Think about moving signs and ask for advise
+- [ ] Add Dropout layers
+- [ ] Countdown to avoid real time guess
+- [ ] Random 100 images chosen for training and testing
 - [ ] Think about more optimal solution about threshold values or background subtraction
-    - [ ] Set hand histogram
-    - [ ] BackgroundSubtractorMOG
-- [ ] Think about moving signs and ask for advise
+    - [x] Set hand histogram
+    - [ ] BackgroundSubtractorMOG / BasNET (Optional for the last part)
 - [ ] Add words and space structure (Optional for the last part)
 - [ ] Text to speech (Optional for the last part)
 
 ### Software Engineering Dept.
 
 - [ ] Enlarge the dataset (Currently 900 for training, 90 for test for every input)
+    - [ ] Training and testing files concludes different images
 - [ ] Add letters to the dataset
 - [ ] UI implementation
 - [ ] Different menus (Optional for the last part)

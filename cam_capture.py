@@ -14,6 +14,9 @@ while True:
     # Count dictionary
     count = {'zero': len(os.listdir(directory + "/0"))}
 
+    # Track number of input data.
+    cv2.putText(frame, "ZERO : " + str(count['zero']), (10, 160), cv2.FONT_HERSHEY_COMPLEX, 1, (255, 255, 0), 1)
+
     # Coordinates of the ROI
     x1 = 320
     y1 = 10
@@ -39,8 +42,8 @@ while True:
 
     # You can change the input in order to add new input.
 
-    #This could be shortened to one line if we want specific input to train
-    #But if we don't want to rerun program again and again we could think
+    # This could be shortened to one line if we want specific input to train
+    # But if we don't want to rerun program again and again we could think
     #to implement like this.
 
 vid.release()
