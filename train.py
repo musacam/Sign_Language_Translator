@@ -4,6 +4,7 @@ from keras.layers import MaxPooling2D
 from keras.layers import Flatten
 from keras.layers import Dense
 from keras.layers import Dropout
+import matplotlib.pyplot as plt
 
 # Initializing the CNN
 classifier = Sequential()
@@ -43,7 +44,7 @@ test_set = test_data.flow_from_directory('data/test',
                                             batch_size=10,
                                             color_mode='grayscale',
                                             class_mode='categorical')
-classifier.fit(
+model = classifier.fit(
         train_set,
         steps_per_epoch=900, # No of images in training set : 0 to 9 every folder has 900 images.
         epochs=10,
@@ -60,3 +61,21 @@ with open("model-bw.json", "w") as json_file:
     json_file.write(model_json)
 classifier.save_weights('model-bw.h5')
 
+print(model.history.keys())
+
+# Visualize model history
+plt.plot(model.history['accuracy'])
+plt.plot(model.history['val_accuracy'])
+plt.title('model accuracy')
+plt.ylabel('accuracy')
+plt.xlabel('epoch')
+plt.legend(['train', 'test'], loc='upper left')
+plt.show()
+
+plt.plot(model.history['loss'])
+plt.plot(model.history['val_loss'])
+plt.title('model loss')
+plt.ylabel('loss')
+plt.xlabel('epoch')
+plt.legend(['train', 'test'], loc='upper left')
+plt.show()
