@@ -12,7 +12,10 @@ classifier = Sequential()
 classifier.add(Convolution2D(32, (3, 3), input_shape=(64, 64, 1), activation='relu'))
 classifier.add(MaxPooling2D(pool_size=(2, 2)))
 # Second convolution layer and pooling
-classifier.add(Convolution2D(32, (3, 3), activation='relu'))
+classifier.add(Convolution2D(64, (3, 3), activation='relu'))
+classifier.add(MaxPooling2D(pool_size=(2, 2)))
+# Third convolution layer and pooling
+classifier.add(Convolution2D(64, (3, 3), activation='relu'))
 classifier.add(MaxPooling2D(pool_size=(2, 2)))
 # Flattening the layers
 classifier.add(Flatten())
