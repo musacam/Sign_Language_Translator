@@ -60,7 +60,7 @@ while True:
     # cv2.putText(frame, prediction[0][0], (320, 360), cv2.FONT_HERSHEY_COMPLEX, 1, (255, 255, 0), 1)
     cv2.imshow("Frame", frame)
 
-    blackboard = np.zeros((300, 700), dtype=np.uint8)
+    blackboard = np.zeros((700, 700), dtype=np.uint8)
     cv2.putText(blackboard, prediction[0][0], (20, 50), cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 255, 0), 2, cv2.LINE_AA)
     cv2.imshow('Predictions', blackboard)
 
