@@ -1,6 +1,7 @@
 from keras.models import model_from_json
 import operator
 import cv2
+import numpy as np
 
 # Loading the model
 json_file = open("model-bw.json", "r")
@@ -56,8 +57,12 @@ while True:
     prediction = sorted(prediction.items(), key=operator.itemgetter(1), reverse=True)
 
     # Displaying the prediction
-    cv2.putText(frame, prediction[0][0], (320, 360), cv2.FONT_HERSHEY_COMPLEX, 1, (255, 255, 0), 1)
+    # cv2.putText(frame, prediction[0][0], (320, 360), cv2.FONT_HERSHEY_COMPLEX, 1, (255, 255, 0), 1)
     cv2.imshow("Frame", frame)
+
+    blackboard = np.zeros((300, 700), dtype=np.uint8)
+    cv2.putText(blackboard, prediction[0][0], (20, 50), cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 255, 0), 2, cv2.LINE_AA)
+    cv2.imshow('Predictions', blackboard)
 
     interrupt = cv2.waitKey(10)
     if interrupt & 0xFF == 27:  # Esc key
