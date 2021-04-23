@@ -3,6 +3,7 @@ from keras.layers import Convolution2D
 from keras.layers import MaxPooling2D
 from keras.layers import Flatten
 from keras.layers import Dense
+from keras.layers import Dropout
 
 # Initializing the CNN
 classifier = Sequential()
@@ -16,6 +17,7 @@ classifier.add(MaxPooling2D(pool_size=(2, 2)))
 classifier.add(Flatten())
 # Fully connected layer
 classifier.add(Dense(units=128, activation='relu')) # Lets think
+classifier.add(Dropout(0.5))
 classifier.add(Dense(units=10, activation='softmax'))
 # Compiling the CNN
 classifier.compile(optimizer='adam', loss='categorical_crossentropy', metrics=['accuracy'])
@@ -49,6 +51,8 @@ classifier.fit(
         validation_steps=90) # No of images in test set : 0 to 9 every folder has 90 images.
 
 # Steps per epoch * epoch = Batch size = All of the set data
+
+classifier.summary()
 
 # Saving the model
 model_json = classifier.to_json()
