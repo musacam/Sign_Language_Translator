@@ -1,10 +1,10 @@
 # Sign Language Translator
 
-AI interpreter for Turkish Sign Language project for final capstone in Bahçeşehir University.
+AI interpreter for Turkish Sign Language.
 
 ## How to Run
 
-Load the needed modules. I am too lazy to create requirements text file. If you added new inputs
+Load the needed modules via requirements file. If you added new inputs
 you need to train the data first. But you can use our trained model.
 If you are ready to go just download and run `final.py`.
 
@@ -31,11 +31,12 @@ classifier.fit function.
 - [x] Numbers trained and desired result observed
 - [x] Add rotate_images function
 - [x] Think about moving signs and ask for advise
-- [ ] Add Dropout layers
-- [ ] Countdown to avoid real time guess
-- [ ] Random 100 images chosen for training and testing
-- [ ] Think about more optimal solution about threshold values or background subtraction
-    - [x] Set hand histogram
+- [x] Add Dropout layers
+- [ ] Countdown to avoid real time multiple guess
+- [ ] Random 100 images chosen for training and testing (on development)
+- [x] Think about more optimal solution about threshold values or background subtraction
+    - [x] BG Extraction / Hand Pose
+    - [ ] Implementation and integration of bg extraction if its needed
     - [ ] BackgroundSubtractorMOG / BasNET (Optional for the last part)
 - [ ] Add words and space structure (Optional for the last part)
 - [ ] Text to speech (Optional for the last part)
@@ -43,7 +44,7 @@ classifier.fit function.
 ### Software Engineering Dept.
 
 - [ ] Enlarge the dataset (Currently 900 for training, 90 for test for every input)
-    - [ ] Training and testing files concludes different images
+    - [x] Training and testing files concludes different images
 - [ ] Add letters to the dataset
 - [ ] UI implementation
 - [ ] Different menus (Optional for the last part)
