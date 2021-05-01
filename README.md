@@ -20,24 +20,17 @@ classifier.fit function.
 
 `rotate_images.py` for enlarge the dataset and avoiding the mirror match.
 
-`segment.py` and `threshold.py` for development purposes only let us handle it.
+`segment.py` for development purposes only let us handle it.
 
 
 ## TO-DO List
 
 ### Computer Engineering Dept.
 
-- [x] Basic structure implementation
-- [x] Numbers trained and desired result observed
-- [x] Add rotate_images function
-- [x] Think about moving signs and ask for advise
-- [x] Add Dropout layers
-- [ ] Countdown to avoid real time multiple guess
-- [ ] Random 100 images chosen for training and testing (on development)
-- [x] Think about more optimal solution about threshold values or background subtraction
-    - [x] BG Extraction / Hand Pose
-    - [ ] Implementation and integration of bg extraction if its needed
-    - [ ] BackgroundSubtractorMOG / BasNET (Optional for the last part)
+- [ ] CNN structure improvement
+- [ ] Accuracy increase
+- [ ] Efficient output display (Countdown or steady still from user)
+- [ ] Implementation and integration of bg extraction if its needed
 - [ ] Add words and space structure (Optional for the last part)
 - [ ] Text to speech (Optional for the last part)
 
