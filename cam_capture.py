@@ -2,9 +2,10 @@ import cv2
 import os
 
 # Train or test can change by its purpose.
-mode = 'test'
+mode = 'testPipelined'
 directory = 'data/' + mode + '/'
-
+timer = 0
+auto_capture = 0
 vid = cv2.VideoCapture(0)
 
 while True:
@@ -33,12 +34,24 @@ while True:
     _, roi = cv2.threshold(roi, 120, 255, cv2.THRESH_BINARY)
     cv2.imshow("ROI", roi)
 
-    # Collect training data by clicking the number
+    #Press "ESC" to stop auto recording
     interrupt = cv2.waitKey(10)
     if interrupt & 0xFF == 27:  # esc key
         break
+
+    #Collect training data by clicking the number
     if interrupt & 0xFF == ord('0'):
         cv2.imwrite(directory + '0/' + str(count['zero']) + '.jpg', roi)
+
+    #Press "S" to start Auto Capture
+    if interrupt & 0xFF == ord('s'):  # esc key
+        auto_capture = not auto_capture
+
+    if auto_capture == 1:
+        if timer > 10:
+            cv2.imwrite(directory + '0/' + str(count['zero']) + '.jpg', roi)
+            timer = 0
+        timer = timer + 1
 
     # You can change the input in order to add new input.
 

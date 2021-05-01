@@ -61,7 +61,7 @@ while True:
     # cv2.putText(frame, prediction[0][0], (320, 360), cv2.FONT_HERSHEY_COMPLEX, 1, (255, 255, 0), 1)
     cv2.imshow("Frame", frame)
 
-    blackboard = np.zeros((700, 700), dtype=np.uint8)
+    blackboard = np.zeros((100, 350), dtype=np.uint8)
     if prediction_count == 0:
         current_prediction = prediction[0][0]
     if current_prediction == prediction[0][0]:
