@@ -1,4 +1,4 @@
-from keras.models import model_from_json
+from tensorflow.keras.models import model_from_json
 import operator
 import cv2
 import numpy as np
@@ -15,6 +15,7 @@ vid = cv2.VideoCapture(0)
 # Numbers dictionary
 categories = {0: 'ZERO', 1: 'ONE', 2: 'TWO', 3: 'THREE', 4: 'FOUR',
               5: 'FIVE', 6: 'SIX', 7: 'SEVEN', 8: 'EIGHT', 9: 'NINE'}
+prediction_count = 0
 
 # Background subtraction implementation ?
 
@@ -61,7 +62,16 @@ while True:
     cv2.imshow("Frame", frame)
 
     blackboard = np.zeros((700, 700), dtype=np.uint8)
-    cv2.putText(blackboard, prediction[0][0], (20, 50), cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 255, 0), 2, cv2.LINE_AA)
+    if prediction_count == 0:
+        current_prediction = prediction[0][0]
+    if current_prediction == prediction[0][0]:
+        prediction_count = prediction_count + 1
+    else:
+        prediction_count = 0
+    if prediction_count < 12:
+        cv2.putText(blackboard, "Hold Still", (20, 50), cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 255, 0), 2, cv2.LINE_AA)
+    else:
+        cv2.putText(blackboard, prediction[0][0], (20, 50), cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 255, 0), 2, cv2.LINE_AA)
     cv2.imshow('Predictions', blackboard)
 
     interrupt = cv2.waitKey(10)
