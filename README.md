@@ -27,17 +27,26 @@ classifier.fit function.
 
 ### Computer Engineering Dept.
 
-- [ ] CNN structure improvement
-- [ ] Accuracy increase
-- [ ] Efficient output display (Countdown or steady still from user)
-- [ ] Implementation and integration of bg extraction if its needed
-- [ ] Add words and space structure (Optional for the last part)
+- [ ] CNN structure improvement (Always need improvement)
+- [ ] Input to memory to sentence structure
 - [ ] Text to speech (Optional for the last part)
+
+#### Finished Tasks
+
+- [x] Basic structure implementation
+- [x] Numbers trained and desired result observed
+- [x] Add rotate_images function
+- [x] Think about moving signs and ask for advise
+- [x] Add Dropout layers
+- [x] Efficient output display (Countdown or steady still from user)
+- [x] Implementation and integration of bg extraction if its needed (Better camera worked)
+- [x] Accuracy increase
 
 ### Software Engineering Dept.
 
 - [ ] Enlarge the dataset (Currently 900 for training, 90 for test for every input)
-    - [x] Training and testing files concludes different images
 - [ ] Add letters to the dataset
 - [ ] UI implementation
 - [ ] Different menus (Optional for the last part)
+
+#### Finished Tasks
