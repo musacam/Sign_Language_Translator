@@ -14,7 +14,12 @@ vid = cv2.VideoCapture(0)
 
 # Numbers dictionary
 categories = {0: 'ZERO', 1: 'ONE', 2: 'TWO', 3: 'THREE', 4: 'FOUR',
-              5: 'FIVE', 6: 'SIX', 7: 'SEVEN', 8: 'EIGHT', 9: 'NINE'}
+              5: 'FIVE', 6: 'SIX', 7: 'SEVEN', 8: 'EIGHT', 9: 'NINE',
+              10: 'A', 11: 'B', 12: 'C', 13: 'D', 14: 'E',
+              15: 'F', 16: 'G', 17: 'H', 18: 'I', 19: 'K',
+              20: 'L', 21: 'M', 22: 'N', 23: 'O', 24: 'P',
+              25: 'R', 26: 'S', 27: 'T', 28: 'U', 29: 'V',
+              30: 'Y', 31: 'Z'}
 prediction_count = 0
 
 # Background subtraction implementation ?
@@ -52,7 +57,30 @@ while True:
                   'SIX': result[0][6],
                   'SEVEN': result[0][7],
                   'EIGHT': result[0][8],
-                  'NINE': result[0][9]}
+                  'NINE': result[0][9],
+                  'A': result[0][10],
+                  'B': result[0][11],
+                  'C': result[0][12],
+                  'D': result[0][13],
+                  'E': result[0][14],
+                  'F': result[0][15],
+                  'G': result[0][16],
+                  'H': result[0][17],
+                  'I': result[0][18],
+                  'K': result[0][19],
+                  'L': result[0][20],
+                  'M': result[0][21],
+                  'N': result[0][22],
+                  'O': result[0][23],
+                  'P': result[0][24],
+                  'R': result[0][25],
+                  'S': result[0][26],
+                  'T': result[0][27],
+                  'U': result[0][28],
+                  'V': result[0][29],
+                  'Y': result[0][30],
+                  'Z': result[0][31]
+                  }
 
     # Sorting based on top prediction
     prediction = sorted(prediction.items(), key=operator.itemgetter(1), reverse=True)
