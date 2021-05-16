@@ -2,7 +2,7 @@ import cv2
 import os
 
 # Train or test can change by its purpose.
-mode = 'testPipelined'
+mode = 'train'
 directory = 'data/' + mode + '/'
 timer = 0
 auto_capture = 0
@@ -13,10 +13,10 @@ while True:
     frame = cv2.flip(frame, 1)
 
     # Count dictionary
-    count = {'zero': len(os.listdir(directory + "/0"))}
+    count = {'b': len(os.listdir(directory + "/b"))}
 
     # Track number of input data.
-    cv2.putText(frame, "ZERO : " + str(count['zero']), (10, 160), cv2.FONT_HERSHEY_COMPLEX, 1, (255, 255, 0), 1)
+    cv2.putText(frame, "B : " + str(count['b']), (10, 160), cv2.FONT_HERSHEY_COMPLEX, 1, (255, 255, 0), 1)
 
     # Coordinates of the ROI
     x1 = 320
@@ -44,20 +44,16 @@ while True:
         cv2.imwrite(directory + '0/' + str(count['zero']) + '.jpg', roi)
 
     #Press "S" to start Auto Capture
-    if interrupt & 0xFF == ord('s'):  # esc key
+    if interrupt & 0xFF == ord('b'):
         auto_capture = not auto_capture
 
     if auto_capture == 1:
-        if timer > 10:
-            cv2.imwrite(directory + '0/' + str(count['zero']) + '.jpg', roi)
+        if timer > 2:
+            cv2.imwrite(directory + 'b/' + str(count['b']) + '.jpg', roi)
             timer = 0
         timer = timer + 1
 
     # You can change the input in order to add new input.
-
-    # This could be shortened to one line if we want specific input to train
-    # But if we don't want to rerun program again and again we could think
-    #to implement like this.
 
 vid.release()
 cv2.destroyAllWindows()

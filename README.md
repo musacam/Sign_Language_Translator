@@ -28,7 +28,7 @@ classifier.fit function.
 ### Computer Engineering Dept.
 
 - [ ] CNN structure improvement (Always need improvement)
-- [ ] Input to memory to sentence structure
+- [ ] Upgrade predicted word structure
 - [ ] Text to speech (Optional for the last part)
 
 #### Finished Tasks
@@ -41,6 +41,8 @@ classifier.fit function.
 - [x] Efficient output display (Countdown or steady still from user)
 - [x] Implementation and integration of bg extraction if its needed (Better camera worked)
 - [x] Accuracy increase
+- [x] Add letters to the dataset (Not our job!)
+- [x] Input to memory to sentence structure
 
 ### Software Engineering Dept.
 

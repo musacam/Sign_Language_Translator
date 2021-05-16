@@ -20,7 +20,12 @@ categories = {0: 'ZERO', 1: 'ONE', 2: 'TWO', 3: 'THREE', 4: 'FOUR',
               20: 'L', 21: 'M', 22: 'N', 23: 'O', 24: 'P',
               25: 'R', 26: 'S', 27: 'T', 28: 'U', 29: 'V',
               30: 'Y', 31: 'Z'}
+
+categories = {value : key for (key, value) in categories.items()}
+
 prediction_count = 0
+predicted_word = ''
+processtimer = 0
 
 # Background subtraction implementation ?
 
@@ -84,26 +89,42 @@ while True:
 
     # Sorting based on top prediction
     prediction = sorted(prediction.items(), key=operator.itemgetter(1), reverse=True)
-
-    # Displaying the prediction
-    # cv2.putText(frame, prediction[0][0], (320, 360), cv2.FONT_HERSHEY_COMPLEX, 1, (255, 255, 0), 1)
     cv2.imshow("Frame", frame)
+    blackboard = np.zeros((300, 350), dtype=np.uint8)
 
-    blackboard = np.zeros((100, 350), dtype=np.uint8)
-    if prediction_count == 0:
-        current_prediction = prediction[0][0]
-    if current_prediction == prediction[0][0]:
-        prediction_count = prediction_count + 1
+    # Contour detection
+    imgray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+    ret, thresh = cv2.threshold(imgray, 127, 255, 0)
+    contours, hierarchy = cv2.findContours(thresh, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
+
+    # Hand detection and prediction on blackboard
+    if len(contours) > 100:
+        if prediction_count == 0:
+            current_prediction = prediction[0][0]
+        if current_prediction == prediction[0][0]:
+            prediction_count = prediction_count + 1
+        else:
+            prediction_count = 0
+        if prediction_count < 10:
+            cv2.putText(blackboard, "Hold Still", (20, 50), cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 255, 0), 2, cv2.LINE_AA)
+            processtimer = 0
+        else:
+            cv2.putText(blackboard, prediction[0][0], (20, 50), cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 255, 0), 2, cv2.LINE_AA)
+            processtimer = processtimer + 1
+        if processtimer > 10:
+            predicted_word += str(categories.get(prediction[0][0]))
+            processtimer = 0
     else:
-        prediction_count = 0
-    if prediction_count < 12:
-        cv2.putText(blackboard, "Hold Still", (20, 50), cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 255, 0), 2, cv2.LINE_AA)
-    else:
-        cv2.putText(blackboard, prediction[0][0], (20, 50), cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 255, 0), 2, cv2.LINE_AA)
+        cv2.putText(blackboard, "No sign detected", (20, 50), cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 255, 0), 2, cv2.LINE_AA)
+    cv2.putText(blackboard, predicted_word, (20, 150), cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 255, 0), 2, cv2.LINE_AA)
     cv2.imshow('Predictions', blackboard)
 
+    # Delete last character from predicted word string by pressing S key.
     interrupt = cv2.waitKey(10)
-    if interrupt & 0xFF == 27:  # Esc key
+    if interrupt & 0xFF == ord('s'):
+        predicted_word = predicted_word[:-1]
+    # Exit by pressing ESC key.
+    if interrupt & 0xFF == 27:
         break
 
 vid.release()
