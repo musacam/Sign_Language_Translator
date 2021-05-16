@@ -13,8 +13,8 @@ loaded_model.load_weights("model-bw.h5")
 vid = cv2.VideoCapture(0)
 
 # Numbers dictionary
-categories = {0: 'ZERO', 1: 'ONE', 2: 'TWO', 3: 'THREE', 4: 'FOUR',
-              5: 'FIVE', 6: 'SIX', 7: 'SEVEN', 8: 'EIGHT', 9: 'NINE',
+categories = {0: '0', 1: '1', 2: '2', 3: '3', 4: '4',
+              5: '5', 6: '6', 7: '7', 8: '8', 9: '9',
               10: 'A', 11: 'B', 12: 'C', 13: 'D', 14: 'E',
               15: 'F', 16: 'G', 17: 'H', 18: 'I', 19: 'K',
               20: 'L', 21: 'M', 22: 'N', 23: 'O', 24: 'P',
@@ -53,16 +53,16 @@ while True:
 
     result = loaded_model.predict(test_image.reshape(1, 64, 64, 1))
 
-    prediction = {'ZERO': result[0][0],
-                  'ONE': result[0][1],
-                  'TWO': result[0][2],
-                  'THREE': result[0][3],
-                  'FOUR': result[0][4],
-                  'FIVE': result[0][5],
-                  'SIX': result[0][6],
-                  'SEVEN': result[0][7],
-                  'EIGHT': result[0][8],
-                  'NINE': result[0][9],
+    prediction = {'0': result[0][0],
+                  '1': result[0][1],
+                  '2': result[0][2],
+                  '3': result[0][3],
+                  '4': result[0][4],
+                  '5': result[0][5],
+                  '6': result[0][6],
+                  '7': result[0][7],
+                  '8': result[0][8],
+                  '9': result[0][9],
                   'A': result[0][10],
                   'B': result[0][11],
                   'C': result[0][12],
