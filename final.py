@@ -21,16 +21,11 @@ categories = {0: '0', 1: '1', 2: '2', 3: '3', 4: '4',
               25: 'R', 26: 'S', 27: 'T', 28: 'U', 29: 'V',
               30: 'Y', 31: 'Z'}
 
-categories = {value : key for (key, value) in categories.items()}
-
 prediction_count = 0
 predicted_word = ''
 processtimer = 0
 
-# Background subtraction implementation ?
-
 # https://opencv-python-tutroals.readthedocs.io/en/latest/py_tutorials/py_video/py_bg_subtraction/py_bg_subtraction.html
-
 
 while True:
     _, frame = vid.read()
@@ -98,7 +93,7 @@ while True:
     contours, hierarchy = cv2.findContours(thresh, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
 
     # Hand detection and prediction on blackboard
-    if len(contours) > 100:
+    if len(contours) < 250:
         if prediction_count == 0:
             current_prediction = prediction[0][0]
         if current_prediction == prediction[0][0]:
@@ -112,7 +107,7 @@ while True:
             cv2.putText(blackboard, prediction[0][0], (20, 50), cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 255, 0), 2, cv2.LINE_AA)
             processtimer = processtimer + 1
         if processtimer > 10:
-            predicted_word += str(categories.get(prediction[0][0]))
+            predicted_word += str(prediction[0][0])
             processtimer = 0
     else:
         cv2.putText(blackboard, "No sign detected", (20, 50), cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 255, 0), 2, cv2.LINE_AA)
@@ -123,6 +118,9 @@ while True:
     interrupt = cv2.waitKey(10)
     if interrupt & 0xFF == ord('s'):
         predicted_word = predicted_word[:-1]
+    # Add space to the prediction by pressing SPACE BAR key.
+    if interrupt & 0xFF == 32:
+        predicted_word += ' '
     # Exit by pressing ESC key.
     if interrupt & 0xFF == 27:
         break
