@@ -18,7 +18,7 @@ classifier.fit function.
 
 `final.py` for testing and observing result part.
 
-`rotate_images.py` for enlarge the dataset and avoiding the mirror match.
+`rotate_images.py` for enlarge the dataset and avoiding the mirror match. If you need to...
 
 `segment.py` for development purposes only let us handle it.
 
@@ -28,8 +28,6 @@ classifier.fit function.
 ### Computer Engineering Dept.
 
 - [ ] CNN structure improvement (Always need improvement)
-- [ ] Upgrade predicted word structure
-- [ ] Text to speech (Optional for the last part)
 
 #### Finished Tasks
 
@@ -43,10 +41,11 @@ classifier.fit function.
 - [x] Accuracy increase
 - [x] Add letters to the dataset (Not our job!)
 - [x] Input to memory to sentence structure
+- [x] Upgrade predicted word structure (Mostly done)
 
 ### Software Engineering Dept.
 
-- [ ] Enlarge the dataset (Currently 900 for training, 90 for test for every input)
+- [ ] Manage the dataset (Currently 900 for training, 90 for test for every input)
 - [ ] Add letters to the dataset
 - [ ] UI implementation
 - [ ] Different menus (Optional for the last part)

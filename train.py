@@ -64,8 +64,6 @@ with open("model-bw.json", "w") as json_file:
     json_file.write(model_json)
 classifier.save_weights('model-bw.h5')
 
-# print(model.history.keys())
-#
 # # Visualize model history
 # plt.plot(model.history['accuracy'])
 # plt.plot(model.history['val_accuracy'])

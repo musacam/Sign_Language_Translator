@@ -92,8 +92,10 @@ while True:
     ret, thresh = cv2.threshold(imgray, 127, 255, 0)
     contours, hierarchy = cv2.findContours(thresh, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
 
+    print(len(contours))
+
     # Hand detection and prediction on blackboard
-    if len(contours) < 250:
+    if len(contours) < 150:
         if prediction_count == 0:
             current_prediction = prediction[0][0]
         if current_prediction == prediction[0][0]:
@@ -106,11 +108,11 @@ while True:
         else:
             cv2.putText(blackboard, prediction[0][0], (20, 50), cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 255, 0), 2, cv2.LINE_AA)
             processtimer = processtimer + 1
-        if processtimer > 10:
+        if processtimer > 20:
             predicted_word += str(prediction[0][0])
             processtimer = 0
     else:
-        cv2.putText(blackboard, "No sign detected", (20, 50), cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 255, 0), 2, cv2.LINE_AA)
+        cv2.putText(blackboard, "Cant detect", (20, 50), cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 255, 0), 2, cv2.LINE_AA)
     cv2.putText(blackboard, predicted_word, (20, 150), cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 255, 0), 2, cv2.LINE_AA)
     cv2.imshow('Predictions', blackboard)
 
