@@ -27,8 +27,6 @@ classifier.fit function.
 
 ### Computer Engineering Dept.
 
-- [ ] CNN structure improvement (Always need improvement)
-
 #### Finished Tasks
 
 - [x] Basic structure implementation
@@ -42,12 +40,11 @@ classifier.fit function.
 - [x] Add letters to the dataset (Not our job!)
 - [x] Input to memory to sentence structure
 - [x] Upgrade predicted word structure (Mostly done)
+- [x] CNN structure improvement (Always need improvement)
 
 ### Software Engineering Dept.
 
-- [ ] Manage the dataset (Currently 900 for training, 90 for test for every input)
-- [ ] Add letters to the dataset
-- [ ] UI implementation
-- [ ] Different menus (Optional for the last part)
-
 #### Finished Tasks
+
+- [x] UI implementation
+- [x] Different menus/login (Optional for the last part)

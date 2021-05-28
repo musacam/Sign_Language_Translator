@@ -7,6 +7,7 @@ from tkinter import Menu
 from tkinter import messagebox as msg
 from tkinter import ttk
 from tkinter import END
+from tkinter import scrolledtext
 import cv2
 from PIL import ImageTk, Image
 from tensorflow.keras.models import model_from_json
@@ -18,7 +19,6 @@ class ThreadRunner:
     ThreadRunner runs the process to get the current frame from the video source
     and it uses the trained model to predict characters from hands on the video
     source. The process had to be separated from the UI thread to avoid freezes.
-
     There are three methods to get frame, roi frame and predicted text
     get_frame() -> gets the current frame
     get_roi_frame() -> gets the current roi frame
@@ -300,7 +300,7 @@ class PredictionText(tk.Text):
         self.predicted_text = ""
         self.text = tk.Text(self, width=30, height=3, wrap=tk.WORD)
         self.text.pack()
-        self.delay = int(25000 / self.fps)
+        self.delay = int(100000 / self.fps)
         self.update_text()
 
     def update_text(self):
@@ -327,8 +327,8 @@ class LoginWindow:
             userlist = self.db.queryFunction(
                 f"SELECT * FROM Users WHERE username = '{self.username.get()}' and password = '{self.password.get()}'")
             if len(userlist) > 0:
-                mainWindow()
                 self.win.destroy()
+                MainWindow(self.username)
             else:
                 msg.showerror("Wrong user!", "User information did not match!")
 
@@ -367,10 +367,10 @@ class LoginWindow:
         self.register_button = ttk.Button(self.containerFrame, text="Register", command=self.register_user)
         self.register_button.grid(column=1, row=4, padx=10, pady=5, sticky=tk.NSEW)
 
-        # self.password_entry.bind("<Return>", lambda e: self.accountCheck())
-        # self.username_entry.bind("<Return>", lambda e: self.accountCheck())
-        # self.password_entry.bind("<Escape>", lambda e: self.exit_window())
-        # self.username_entry.bind("<Escape>", lambda e: self.exit_window())
+        self.password_entry.bind("<Return>", lambda e: self.account_check())
+        self.username_entry.bind("<Return>", lambda e: self.account_check())
+        self.password_entry.bind("<Escape>", lambda e: self.exit_window())
+        self.username_entry.bind("<Escape>", lambda e: self.exit_window())
 
 
 class RegisterUserWindow:
@@ -443,14 +443,14 @@ class RegisterUserWindow:
         self.cancel_button = ttk.Button(self.containerFrame2, text="Cancel", command=self.exit_window)
         self.cancel_button.grid(column=1, row=6, padx=10, pady=5, sticky=tk.NSEW)
 
-        # self.password_entry.bind("<Return>", lambda e: self.account_check())
-        # self.username_entry.bind("<Return>", lambda e: self.account_check())
-        # self.r_password_entry.bind("<Escape>", lambda e: self.exit_window())
-        # self.r_username_entry.bind("<Escape>", lambda e: self.exit_window())
+        self.password_entry.bind("<Return>", lambda e: self.create_user())
+        self.username_entry.bind("<Return>", lambda e: self.create_user())
+        self.password_entry.bind("<Escape>", lambda e: self.exit_window())
+        self.username_entry.bind("<Escape>", lambda e: self.exit_window())
 
 
 class MainWindow:
-    def __init__(self):
+    def __init__(self, username):
         self.win3 = tk.Tk()
         self.win3.title("Turkish Sign Language Translator")
         self.db = Database("database.db")
@@ -458,6 +458,7 @@ class MainWindow:
         self.signImage = None
         self.predictionLabel = None
         self.translationResult = None
+        self.username = username
         self.widgets()
 
     def exit_window(self):
@@ -466,41 +467,14 @@ class MainWindow:
         self.win3.destroy()
         quit()
 
+    def about_window(self):
+        msg.showinfo("About us", "This project created by: \nCanberk Enes SEN - 1609998, Muhammet Musa CAM - 1728774 and Furkan GULLE - 1728824 ")
+
     def on_closing(self):
         self.cameraFrame.vid.running = False
         self.win3.quit()
         self.win3.destroy()
         exit()
-
-    def open_camera(self):
-        self.confirmation = msg.askquestion('Open Camera', 'Do you want to open camera?', icon='warning')
-        if self.confirmation == 'yes':
-            pass
-        else:
-            pass
-
-    def less_actions(self):
-        self.settings_button.destroy()
-        self.history_button.destroy()
-        self.exit_button.destroy()
-        # ---------------------------------------------------------------
-        self.show.configure(text="Show More", command=self.more_actions)
-
-    def more_actions(self):
-        self.history_button = ttk.Button(self.containerFrame3, text="History", command=self.history)
-        self.history_button.grid(column=0, row=3, padx=5, pady=5, sticky=tk.EW)
-        self.settings_button = ttk.Button(self.containerFrame3, text="Settings", command=self.accessibility_settings)
-        self.settings_button.grid(column=0, row=4, padx=5, pady=5, sticky=tk.EW)
-        self.exit_button = ttk.Button(self.containerFrame3, text="Exit", command=self.exit_window)
-        self.exit_button.grid(column=0, row=5, padx=5, pady=5, sticky=tk.EW)
-        # ---------------------------------------------------------------
-        self.show.configure(text="Show Less", command=self.less_actions)
-
-    def accessibility_settings(self):
-        AccessibilitySettingsWindow()
-
-    def history(self):
-        HistoryWindow()
 
     def widgets(self):
         menu_bar = Menu(self.win3)
@@ -509,25 +483,26 @@ class MainWindow:
         file_menu = Menu(menu_bar, tearoff=0)
         menu_bar.add_cascade(label="File", menu=file_menu)
         file_menu.add_command(label="Exit", command=self.exit_window)
-        #file_menu.add_separator()
+        file_menu.add_separator()
 
         help_menu = Menu(menu_bar, tearoff=0)
         menu_bar.add_cascade(label="Help", menu=help_menu)
-        #help_menu.add_command(label="About", command=self.about_window)
+        help_menu.add_command(label="About", command=self.about_window)
 
-        # ---------------------------------------------------------------
         self.win3.columnconfigure(0, weight=0)
         self.win3.columnconfigure(1, weight=1)
         self.win3.rowconfigure(0, weight=0)
 
-        self.containerFrame3 = ttk.LabelFrame(self.win3, text="Menu")
+        self.containerFrame3 = ttk.LabelFrame(self.win3, text="Info")
         self.containerFrame3.grid(column=0, row=0, padx=10, pady=10, sticky=tk.NSEW)
-        self.welcome_user = ttk.Label(self.containerFrame3, text="Welcome")
-        self.welcome_user.grid(column=0, row=0, padx=5, pady=5, sticky=tk.EW)
-        self.open_camera = ttk.Button(self.containerFrame3, text="Open Camera", command=self.open_camera)
-        self.open_camera.grid(column=0, row=1, padx=5, pady=5, sticky=tk.EW)
-        self.show = ttk.Button(self.containerFrame3, text="Show More", command=self.more_actions)
-        self.show.grid(column=0, row=2, padx=5, pady=5, sticky=tk.EW)
+        self.welcome_user = ttk.Label(self.containerFrame3, text=f"Hi {self.username.get()}!")
+        self.welcome_user.grid(column=0, row=0, padx=5, pady=5, sticky=tk.NSEW)
+        self.takenote_label = ttk.Label(self.containerFrame3, text="Take a note ✎")
+        self.takenote_label.grid(column=0, row=1, padx=5, pady=(10, 5), sticky=tk.NSEW)
+        self.take_note = scrolledtext.ScrolledText(self.containerFrame3, width=15, height=20)
+        self.take_note.grid(column=0, row=2, padx=5, pady=5, sticky=tk.NS)
+        self.exit_button = ttk.Button(self.containerFrame3, text="Exit", command=self.exit_window)
+        self.exit_button.grid(column=0, row=3, padx=5, pady=5, sticky=tk.NSEW)
 
         self.containerFrame4 = ttk.LabelFrame(self.win3, text="Translation")
         self.containerFrame4.grid(column=1, row=0, padx=10, pady=10, sticky=tk.NSEW)
@@ -550,46 +525,7 @@ class MainWindow:
         self.translationResult = PredictionText(self.containerFrame4, self.cameraFrame.vid, self.cameraFrame.vid.fps)
         self.translationResult.grid(column=0, row=3, padx=5, pady=5, columnspan=3)
 
-
-class AccessibilitySettingsWindow:
-    def __init__(self):
-        self.win4 = tk.Tk()
-        self.win4.title("Accessibility Settings")
-        self.db = Database("database.db")
-        self.widgets()
-
-    def widgets(self):
-        self.textColor_label = ttk.Label(self.win4, text="Text Color:")
-        self.textColor_label.grid(column=0, row=0, padx=10, pady=5, sticky=tk.NSEW)
-        self.text_color = tk.StringVar()
-        self.textColor_combobox = ttk.Combobox(self.win4, width=12, textvariable=self.text_color)
-        self.textColor_combobox['values'] = ('Black', 'White', 'Red', 'Yellow')
-        self.textColor_combobox.current(1)
-        self.textColor_combobox.grid(column=1, row=0, padx=10, pady=5, sticky=tk.NSEW)
-
-        self.backgroundColor_label = ttk.Label(self.win4, text="Background of Text:")
-        self.backgroundColor_label.grid(column=0, row=1, padx=10, pady=5, sticky=tk.NSEW)
-        self.background_color = tk.StringVar()
-        self.backgroundColor_combobox = ttk.Combobox(self.win4, width=12, textvariable=self.background_color)
-        self.backgroundColor_combobox['values'] = ('Black', 'White', 'Red', 'Yellow')
-        self.backgroundColor_combobox.current(2)
-        self.backgroundColor_combobox.grid(column=1, row=1, padx=10, pady=5, sticky=tk.NSEW)
-
-
-class HistoryWindow:
-    def __init__(self):
-        self.win5 = tk.Tk()
-        self.win5.title("History")
-        self.db = Database("database.db")
-        self.widgets()
-
-    def widgets(self):
-        self.translate_history = tk.Listbox(self.win5, width=40)
-        self.translate_history.insert(1, "BIR")
-        self.translate_history.insert(2, "IKI")
-        self.translate_history.insert(3, "DORT")
-        self.translate_history.insert(4, "DOKUZ")
-        self.translate_history.grid(column=0, row=0)
+        self.win3.bind("<Escape>", lambda e: self.exit_window())
 
 
 class Database:
@@ -636,5 +572,5 @@ class Database:
 
 
 if __name__ == "__main__":
-    app = MainWindow()
-    app.win3.mainloop()
+    app = LoginWindow()
+    app.win.mainloop()
